@@ -10,6 +10,13 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+local xresources = require("beautiful.xresources")
+local gears = require("gears")
+local lain  = require("lain")
+local markup = lain.util.markup
+local dpi = xresources.apply_dpi
+local inspect = require("inspect.inspect")
+local theme = require("theme.main")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -45,7 +52,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HOME")))
 
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
@@ -101,13 +108,34 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
+function get_widget_with_margins(widget, margin_left, margin_right)
+    local ml = margin_left or 0
+    local mr = margin_right or 0
+    return wibox.container.margin(widget, dpi(ml), dpi(mr), dpi(5), dpi(5))
+end
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+mykeyboardlayout = get_widget_with_margins(awful.widget.keyboardlayout())
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+
+
+mytextclock = get_widget_with_margins(wibox.widget.textclock("%H:%M"), 0, 10)
+myseparator = get_widget_with_margins(wibox.widget.imagebox(
+        string.format('/%s/.config/awesome/theme/icons/separator.png', os.getenv('HOME')), false, false), 10, 10)
+mymem = get_widget_with_margins(lain.widget.mem({
+settings = function()
+        widget:set_markup(markup.font(beautiful.font, "RAM: ") .. markup.font(beautiful.font, mem_now.used .. "/"
+                          .. mem_now.total))
+    end
+    }).widget)
+mycpu = get_widget_with_margins(lain.widget.cpu({
+    settings = function()
+        widget:set_markup(markup.font(beautiful.font, "CPU: " .. cpu_now.usage
+                          .. "%"))
+    end
+}).widget)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -169,7 +197,51 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    -- awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
+
+    awful.tag.add("", {
+    icon               = string.format('/%s/.config/awesome/theme/tag-icons/tag-1.png', os.getenv('HOME')),
+    layout             = awful.layout.suit.tile,
+    master_fill_policy = "master_width_factor",
+    gap_single_client  = true,
+    gap                = 10,
+    screen             = s,
+    selected           = true,
+    })
+
+       awful.tag.add("", {
+    icon               = string.format('/%s/.config/awesome/theme/tag-icons/tag-2.png', os.getenv('HOME')),
+    layout             = awful.layout.suit.tile,
+    master_fill_policy = "master_width_factor",
+    gap_single_client  = true,
+    gap                = 10,
+    screen             = s,
+    })
+
+      awful.tag.add("", {
+    icon               = string.format('/%s/.config/awesome/theme/tag-icons/tag-3.png', os.getenv('HOME')),
+    layout             = awful.layout.suit.tile,
+    master_fill_policy = "master_width_factor",
+    gap_single_client  = true,
+    gap                = 10,
+    screen             = s,
+    })
+      awful.tag.add("", {
+    icon               = string.format('/%s/.config/awesome/theme/tag-icons/tag-4.png', os.getenv('HOME')),
+    layout             = awful.layout.suit.tile,
+    master_fill_policy = "master_width_factor",
+    gap_single_client  = true,
+    gap                = 10,
+    screen             = s,
+    })
+      awful.tag.add("", {
+    icon               = string.format('/%s/.config/awesome/theme/tag-icons/tag-5.png', os.getenv('HOME')),
+    layout             = awful.layout.suit.tile,
+    master_fill_policy = "master_width_factor",
+    gap_single_client  = true,
+    gap                = 10,
+    screen             = s,
+    })
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -182,21 +254,83 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist {
-        screen  = s,
-        filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
-    }
+    s.mytaglist = get_widget_with_margins(awful.widget.taglist {
+    screen  = s,
+    filter  = awful.widget.taglist.filter.all,
+    style   = {
+        shape = gears.shape.powerline
+    },
+  
+    widget_template = {
+        {
+            {
+              id     = 'icon_role',
+              widget = wibox.widget.imagebox,
+            },
+            right = dpi(10),
+            widget = wibox.container.margin
+        },
+        id     = 'background_role',
+        widget = wibox.container.background,
+        create_callback = function(self, c3, index, objects) --luacheck: no unused args
+            naughty.notify({ title = "debug", text = inspect(index) .. inspect(c3.icon) .. inspect(c3.clients) })
+
+            if c3.selected then
+                c3.icon = string.format('%s/.config/awesome/theme/tag-selected-icons/tag-selected-%s.png', os.getenv('HOME'), index)
+            else 
+                c3.icon = string.format('%s/.config/awesome/theme/tag-icons/tag-%s.png', os.getenv('HOME'), index)
+            end
+           
+            
+
+        end,
+        update_callback = function(self, c3, index, objects) --luacheck: no unused args
+            -- naughty.notify({ title = "debug", text = inspect(index) .. inspect(c3.icon) .. inspect(type(c3.selected)) })
+
+            if c3.selected then
+                c3.icon = string.format('%s/.config/awesome/theme/tag-selected-icons/tag-selected-%s.png', os.getenv('HOME'), index)
+            else 
+                c3.icon = string.format('%s/.config/awesome/theme/tag-icons/tag-%s.png', os.getenv('HOME'), index)
+            end
+           
+            
+
+        end,
+    },
+    buttons = taglist_buttons
+}, dpi(10), dpi(-10))
 
     -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
+    s.mytasklist = get_widget_with_margins(awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
-    }
+        buttons = tasklist_buttons,
+        widget_template = {
+        
+            {
+                {
+                   {
+                        id     = 'icon_role',
+                        widget = wibox.widget.imagebox,
+                    },
+                    margins = dpi(10),
+                    widget  = wibox.container.margin,
+                },
+                {
+                    id     = 'text_role',
+                    widget = wibox.widget.textbox,
+                },
+                layout = wibox.layout.fixed.horizontal,
+            },
+            left  = 0,
+            right = dpi(30),
+            widget = wibox.container.margin
+        
+    },
+    })
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(50) })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -205,15 +339,21 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
+            myseparator,
+            s.mylayoutbox,
+            myseparator,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
-            wibox.widget.systray(),
+            myseparator,
+            mycpu,
+            myseparator,
+            mymem,
+            myseparator,
             mytextclock,
-            s.mylayoutbox,
         },
     }
 end)
@@ -543,10 +683,10 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
+            -- awful.titlebar.widget.floatingbutton (c),
             awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
+            -- awful.titlebar.widget.stickybutton   (c),
+            -- awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
