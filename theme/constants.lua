@@ -1,5 +1,5 @@
 local assets = {
-  FONT = "Inter 16"
+  FONT = 'Inter 16',
 }
 
 return assets
