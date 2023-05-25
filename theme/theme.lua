@@ -145,6 +145,10 @@ theme.layout_cornerse = themes_path .. 'layouts/cornerse.png'
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
 
+-- Notification
+theme.notification_bg = '#111111'
+theme.notification_fg = '#FFFFFF'
+
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

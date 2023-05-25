@@ -1,5 +1,4 @@
 local beautiful = require('beautiful')
-local theme_assets = require('beautiful.theme_assets')
 local xresources = require('beautiful.xresources')
 
 local awful = require('awful')

@@ -7,14 +7,8 @@ local awful = require('awful')
 local gears = require('gears')
 require('awful.autofocus')
 -- Widget and layout library
-local wibox = require('wibox')
 -- Theme handling library
 local beautiful = require('beautiful')
-local gears = require('gears')
-local lain = require('lain')
-local xresources = require('beautiful.xresources')
-local markup = lain.util.markup
-local inspect = require('inspect.inspect')
 local theme = require('theme.main')
 -- Notification library
 local hotkeys_popup = require('awful.hotkeys_popup')
