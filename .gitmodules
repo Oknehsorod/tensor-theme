@@ -1,0 +1,6 @@
+[submodule "inspect"]
+	path = inspect
+	url = https://github.com/kikito/inspect.lua
+[submodule "lain"]
+	path = lain
+	url = https://github.com/lcpz/lain
