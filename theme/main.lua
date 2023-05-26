@@ -31,11 +31,11 @@ local function set_wallpaper(s)
 end
 
 local function get_tag_icon(index)
-  return string.format('%s/.config/awesome/theme/tag-icons/tag-%s.png', os.getenv('HOME'), index)
+  return string.format('%s/.config/awesome/theme/icons/tag-icons/tag-%s.png', os.getenv('HOME'), index)
 end
 
 local function get_selected_tag_icon(index)
-  return string.format('%s/.config/awesome/theme/tag-selected-icons/tag-selected-%s.png', os.getenv('HOME'), index)
+  return string.format('%s/.config/awesome/theme/icons/tag-selected-icons/tag-selected-%s.png', os.getenv('HOME'), index)
 end
 
 local function get_separator_icon()
@@ -43,11 +43,11 @@ local function get_separator_icon()
 end
 
 local function get_windows_tag_icon(index)
-  return string.format('%s/.config/awesome/theme/tag-windows-icons/tag-windows-%s.png', os.getenv('HOME'), index)
+  return string.format('%s/.config/awesome/theme/icons/tag-windows-icons/tag-windows-%s.png', os.getenv('HOME'), index)
 end
 
 local function get_urgent_windows_tag_icon(index)
-  return string.format('%s/.config/awesome/theme/tag-urgent-window-icons/%s.png', os.getenv('HOME'), index)
+  return string.format('%s/.config/awesome/theme/icons/tag-urgent-window-icons/%s.png', os.getenv('HOME'), index)
 end
 
 local function m(widget, ml, mr, mb, mt)
