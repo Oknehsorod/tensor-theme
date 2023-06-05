@@ -1,19 +1,12 @@
----------------------------
--- Default awesome theme --
----------------------------
-
-local gears = require('gears')
-local theme_assets = require('beautiful.theme_assets')
 local xresources = require('beautiful.xresources')
+local gears = require('gears')
 local dpi = xresources.apply_dpi
-local lain = require('lain')
 
-local gfs = require('gears.filesystem')
-local themes_path = string.format('%s/.config/awesome/theme/', os.getenv('HOME'))
+local themes_path = string.format('%s/.config/awesome/tensor-theme/', os.getenv('HOME'))
 
 local theme = {}
 
-theme.font = 'Inter 14'
+theme.font = 'Inter 16'
 
 theme.bg_normal = '#FFFFFF'
 theme.systray_icon_spacing = 5
@@ -33,6 +26,7 @@ theme.bg_focus = '#C9C9C900'
 theme.bg_urgent = '#ff000000'
 theme.bg_minimize = '#444444'
 theme.bg_systray = theme.bg_normal
+theme.bg_systray = '#FFFFFF'
 
 theme.fg_normal = '#111111'
 theme.fg_focus = '#333333'
@@ -40,13 +34,13 @@ theme.fg_urgent = '#333333'
 theme.fg_minimize = '#333333'
 
 theme.useless_gap = 0
-theme.border_width = dpi(1)
+theme.border_width = dpi(2)
 theme.border_normal = '#000000'
-theme.border_focus = '#535d6c'
+theme.border_focus = '#333333'
 theme.border_marked = '#91231c'
 
 theme.titlebar_fg = '#FFFFFF'
-theme.titlebar_bg_focus = '#111111'
+theme.titlebar_bg_focus = '#141414'
 theme.titlebar_bg = '#777777'
 
 -- There are other variable sets
@@ -83,6 +77,13 @@ theme.titlebar_bg = '#777777'
 theme.menu_submenu_icon = themes_path .. 'submenu.png'
 theme.menu_height = dpi(15)
 theme.menu_width = dpi(100)
+
+theme.notification_shape = function (cr, width, height)
+    return gears.shape.rounded_rect(cr, width, height, dpi(8))
+end
+theme.notification_border_width = dpi(1)
+theme.notification_border_color = '#91caff'
+theme.notification_bg = '#e6f4ff'
 
 -- You can add as many variables as
 -- you wish and access them by using
@@ -146,8 +147,6 @@ theme.layout_cornerse = themes_path .. 'icons/layouts/cornerse.png'
 theme.icon_theme = nil
 
 -- Notification
-theme.notification_bg = '#111111'
-theme.notification_fg = '#FFFFFF'
 
 return theme
 
