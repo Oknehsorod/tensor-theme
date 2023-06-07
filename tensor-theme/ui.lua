@@ -1,8 +1,6 @@
 local awful = require('awful')
 local beautiful = require('beautiful')
-local gears = require('gears')
 local lain = require('lain')
-local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 local wibox = require('wibox')
 local markup = lain.util.markup
 
