@@ -4,6 +4,3 @@
 [submodule "lain"]
 	path = lain
 	url = https://github.com/lcpz/lain
-[submodule "awesome-wm-widgets"]
-	path = awesome-wm-widgets
-	url = https://github.com/streetturtle/awesome-wm-widgets.git

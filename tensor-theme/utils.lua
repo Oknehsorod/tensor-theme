@@ -33,7 +33,7 @@ function module.icon.get_urgent_windows_tag_icon(index)
 end
 
 function print(value)
-  naughty.notify({ font = 'Inter 8',text = inspect(value, { depth = 2 }), timeout = 10000 })
+  naughty.notify({ font = 'Inter 8', text = inspect(value, { depth = 2 }), timeout = 10000 })
 end
 
 function module.m(widget, ml, mr, mb, mt)
@@ -42,6 +42,10 @@ end
 
 function module.to_fixed(num)
   return string.format('%.2f', num)
+end
+
+function module.get_integer_str(num)
+  return string.format('%.0f', num)
 end
 
 function module.get_fixed_str(str, min_length)

@@ -1,9 +1,9 @@
 local beautiful = require('beautiful')
 
 local keys = require('tensor-theme.keys')
+local notification = require('tensor-theme.notification')
 local rules = require('tensor-theme.rules')
 local signals = require('tensor-theme.signals')
-local notification = require('tensor-theme.notification')
 
 local module = {}
 

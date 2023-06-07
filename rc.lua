@@ -73,7 +73,7 @@ awesome.connect_signal('startup', function()
     'guake --hide',
     'flameshot',
     'killall volctl',
-    'volctl'
+    'volctl',
   }
 
   for _, command in ipairs(commands) do

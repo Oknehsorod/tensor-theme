@@ -1,9 +1,9 @@
 local awful = require('awful')
 local beautiful = require('beautiful')
+local gears = require('gears')
 local lain = require('lain')
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 local wibox = require('wibox')
-local gears = require('gears')
 local markup = lain.util.markup
 
 local xresources = require('beautiful.xresources')
@@ -131,9 +131,19 @@ function module.create_panel(screen)
 
   systray_widget = utils.m(systray_widget, 0, 5, 10, 10)
 
-  
+  local cpu_temp_widget = lain.widget.temp({
+    settings = function()
+      widget:set_markup(markup.font(beautiful.font, 'CPU: ' .. utils.get_integer_str(coretemp_now) .. '°'))
+    end,
+  }).widget
+
+  local gpu_temp_widget = awful.widget.watch(constants.GPU_TEMP_COMMAND, 15, function(widget, stdout)
+    widget:set_text('GPU: ' .. stdout:gsub('\n', '') .. '°')
+  end)
+
   -- Create the wibox
-  local main_container = awful.wibar({ position = 'bottom', screen = screen, height = constants.PANEL_HEIGHT, bg = '#FFFFFF' })
+  local main_container =
+    awful.wibar({ position = 'bottom', screen = screen, height = constants.PANEL_HEIGHT, bg = '#FFFFFF' })
 
   screen.ui_widgets = {}
   screen.ui_widgets.promptbox_widget = awful.widget.prompt()
@@ -151,6 +161,10 @@ function module.create_panel(screen)
     { -- Right widgets
       layout = wibox.layout.fixed.horizontal,
       keyboard_widget,
+      separator_widget,
+      gpu_temp_widget,
+      separator_widget,
+      cpu_temp_widget,
       separator_widget,
       systray_widget,
       separator_widget,

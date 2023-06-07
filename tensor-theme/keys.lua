@@ -1,8 +1,8 @@
 local awful = require('awful')
+local constants = require('tensor-theme.constants')
 local gears = require('gears')
 local hotkeys_popup = require('awful.hotkeys_popup')
 local menubar = require('menubar')
-local constants = require('tensor-theme.constants')
 
 local module = {}
 
@@ -10,16 +10,16 @@ local modkey = 'Mod4'
 local altkey = 'Mod1'
 
 local globalkeys = gears.table.join(
-  awful.key({ 'Control', altkey }, 't', function ()
+  awful.key({ 'Control', altkey }, 't', function()
     awful.tag.viewonly(awful.screen.focused().tags[2])
   end),
-  awful.key({ 'Control', altkey }, 'b', function ()
+  awful.key({ 'Control', altkey }, 'b', function()
     awful.tag.viewonly(awful.screen.focused().tags[3])
   end),
-  awful.key({ 'Control', altkey }, 'm', function ()
+  awful.key({ 'Control', altkey }, 'm', function()
     awful.tag.viewonly(awful.screen.focused().tags[4])
   end),
-  awful.key({ 'Control', altkey }, 'f', function ()
+  awful.key({ 'Control', altkey }, 'f', function()
     awful.tag.viewonly(awful.screen.focused().tags[1])
   end),
   awful.key({}, 'Print', function()

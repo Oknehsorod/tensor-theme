@@ -27,6 +27,8 @@ module.APPS = {
   },
 }
 
+module.GPU_TEMP_COMMAND = 'nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader'
+
 module.CLIENT_RADIUS = dpi(10)
 
 return module

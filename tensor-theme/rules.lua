@@ -5,11 +5,9 @@ local gears = require('gears')
 
 local module = {}
 
-local clientbuttons = gears.table.join(
-    awful.button({ }, 1, function (c)
-        c:emit_signal("request::activate", "mouse_click", {raise = true})
-    end)
-)
+local clientbuttons = gears.table.join(awful.button({}, 1, function(c)
+  c:emit_signal('request::activate', 'mouse_click', { raise = true })
+end))
 
 function module.init()
   awful.rules.rules = {

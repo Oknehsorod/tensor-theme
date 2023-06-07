@@ -1,5 +1,5 @@
-local xresources = require('beautiful.xresources')
 local gears = require('gears')
+local xresources = require('beautiful.xresources')
 local dpi = xresources.apply_dpi
 
 local themes_path = string.format('%s/.config/awesome/tensor-theme/', os.getenv('HOME'))
@@ -78,8 +78,8 @@ theme.menu_submenu_icon = themes_path .. 'submenu.png'
 theme.menu_height = dpi(15)
 theme.menu_width = dpi(100)
 
-theme.notification_shape = function (cr, width, height)
-    return gears.shape.rounded_rect(cr, width, height, dpi(8))
+theme.notification_shape = function(cr, width, height)
+  return gears.shape.rounded_rect(cr, width, height, dpi(8))
 end
 theme.notification_border_width = dpi(1)
 theme.notification_border_color = '#91caff'
