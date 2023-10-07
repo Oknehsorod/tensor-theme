@@ -3,11 +3,11 @@ local dpi = xresources.apply_dpi
 
 local module = {}
 
-module.FONT = 'Inter 16'
-module.FONT_MONO = 'Roboto 16'
+module.FONT = 'Inter 12'
+module.FONT_MONO = 'Roboto 12'
 
-module.PANEL_HEIGHT = dpi(48)
-module.TITLEBAR_HEIGHT = dpi(36)
+module.PANEL_HEIGHT = dpi(40)
+module.TITLEBAR_HEIGHT = dpi(30)
 
 module.TERMINAL = 'terminator'
 
@@ -24,6 +24,10 @@ module.APPS = {
   {
     'slack',
     'telegram',
+  },
+  {
+    'DBeaver',
+    'postman',
   },
 }
 

@@ -45,7 +45,7 @@ function module.create_panel(screen)
       widget:set_markup(
         markup.font(beautiful.font, 'RAM: ')
           .. markup.font(
-            'Roboto Mono 16',
+            'Roboto Mono 14',
             utils.get_fixed_str(utils.to_fixed(mem_now.used / 1024), 5)
               .. '/'
               .. math.floor(mem_now.total / 1024)
@@ -59,7 +59,7 @@ function module.create_panel(screen)
       widget:set_markup(
         markup.font(
           beautiful.font,
-          'CPU: ' .. markup.font('Roboto Mono 16', utils.get_fixed_str(tostring(cpu_now.usage), 2)) .. '%'
+          'CPU: ' .. markup.font('Roboto Mono 14', utils.get_fixed_str(tostring(cpu_now.usage), 2)) .. '%'
         )
       )
     end,
@@ -162,8 +162,8 @@ function module.create_panel(screen)
       separator_widget,
       systray_widget,
       separator_widget,
-      gpu_temp_widget,
-      separator_widget,
+      -- gpu_temp_widget,
+      -- separator_widget,
       cpu_temp_widget,
       separator_widget,
       cpu_widget,

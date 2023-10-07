@@ -6,7 +6,7 @@ local themes_path = string.format('%s/.config/awesome/tensor-theme/', os.getenv(
 
 local theme = {}
 
-theme.font = 'Inter 16'
+theme.font = 'Inter 14'
 
 theme.bg_normal = '#FFFFFF'
 theme.systray_icon_spacing = 5

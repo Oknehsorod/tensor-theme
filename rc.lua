@@ -6,6 +6,7 @@ require('awful.autofocus')
 local menubar = require('menubar')
 local naughty = require('naughty')
 local theme = require('tensor-theme.main')
+mouse.screen = screen.primary
 
 theme.init()
 
