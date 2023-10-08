@@ -35,7 +35,6 @@ function module.init()
       rule = { instance = 'guake' },
       properties = {
         floating = true,
-        x = 0,
         border_width = 0,
         titlebars_enabled = false,
         shape = function()
