@@ -42,6 +42,16 @@ function module.init()
         end,
       },
     },
+    {
+      rule = { instance = 'pcmanfm' },
+      properties = {
+        floating = true,
+        raise = true,
+        ontop = true,
+        placement = awful.placement.centered,
+      },
+    },
+    { rule_any = { type = { 'dialog' } }, properties = { floating = true, raise = true } },
     { rule_any = { type = { 'normal', 'dialog' } }, properties = { titlebars_enabled = true } },
   }
 

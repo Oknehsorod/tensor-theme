@@ -11,6 +11,12 @@ local modkey = 'Mod4'
 local altkey = 'Mod1'
 
 local globalkeys = gears.table.join(
+  awful.key({ altkey }, 'F4', function()
+    local current_client = client.focus
+    if current_client then
+      current_client:kill()
+    end
+  end, { description = 'Kill current focused client.', group = 'client' }),
   awful.key({ altkey }, 'Tab', function()
     local tag = awful.screen.focused().selected_tags[1]
     if tag == nil then

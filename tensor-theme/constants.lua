@@ -12,9 +12,7 @@ module.TITLEBAR_HEIGHT = dpi(30)
 module.TERMINAL = 'terminator'
 
 module.APPS = {
-  {
-    'pcmanfm',
-  },
+  {},
   {
     'terminator',
   },
